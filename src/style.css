@@ -1,7 +1,39 @@
+:root {
+    --dark: #9EBDD7;
+}
 html, body {
     margin: 0px;
     padding: 0px;
     height: 100vh;
     width: 100vw;
-    background-color: black;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.white{
+    background-color: white;
+}
+
+.black {
+    background-color: var(--dark);
+}
+
+#chess-board {
+    min-width: 500px;
+    min-height: 500px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    border: 1px solid black;
+}
+
+.red {
+    background-color: red !important;
 }
