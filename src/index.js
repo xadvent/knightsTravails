@@ -1,7 +1,13 @@
 import './style.css';
 import makeBoard from './building/makeBoard';
-import { getKnightMoves, showKnightMoves } from './movement/checkingMoves';
+import { getKnightMoves, showAllKnightMoves} from './movement/checkingMoves';
+import clearBoard from './building/clearBoard';
+import { findPathBFS } from './BFS/getPath';
 
 makeBoard();
-const arr = getKnightMoves(4,5);
-showKnightMoves(arr);
+console.log(findPathBFS(2, 1, 5, 5))
+
+setTimeout(() => {
+    clearBoard()
+}, 10000);
+

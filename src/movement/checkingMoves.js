@@ -14,12 +14,10 @@ export function getKnightMoves(x, y){
     return moves;
 }
 
-export function showKnightMoves(arr){
+export function showAllKnightMoves(arr){
     for(let index = 0; index < arr.length; index++) {
         const element = arr[index];
-        console.log(element)
-        const position ='C' + element[0] + 'R' + element[1] + '';
-        console.log(position)
+        const position ='C' + element[1] + 'R' + element[0] + '';
         const square = document.querySelector('.' + position);
         square.classList.add('red');
     }
