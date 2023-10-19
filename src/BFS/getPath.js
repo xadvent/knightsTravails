@@ -44,12 +44,14 @@ export function findPathBFS(x, y, endX, endY){
 }
 
 function markRed(arr){
+    let count = 1;
     for(let index = 1; index < arr.length; index++) {
         const element = arr[index];
         const position ='C' + element[0] + 'R' + element[1] + '';
         const square = document.querySelector('.' + position);
         setTimeout(() => {
             square.classList.add('red');
-        }, 500 * index - 1);
+            square.textContent = count++;
+        }, 400 * index - 1);
     }
 }
