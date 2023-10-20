@@ -61,21 +61,27 @@ export function markRed(arr){
     }
 }
 
-export function moveKnight(arr){
-    let checkForDelete = document.querySelectorAll('#knight');
-    if(checkForDelete.length > 0){
-        checkForDelete.forEach(element => {
-            element.remove();
+export async function moveKnight(arr) {
+    // let checkForDelete = document.querySelectorAll('#knight');
+    // if (checkForDelete.length > 0) {
+    //     checkForDelete.forEach(element => {
+    //         element.remove();
+    //     });
+    // }
+
+    let firstRun = true
+    // running through from start to end - changing positions every 400ms
+    for (let index = 0; index < arr.length; index++) {
+        const element = arr[index];
+        if(firstRun){
+            firstRun = false;
+            continue;
+        }
+        await new Promise(resolve => {
+            setTimeout(() => {
+                placeKnight(element[0], element[1]);
+                resolve();
+            }, 500);
         });
     }
-
-    // running through from start to end - changing positions every 400ms
-    for(let index = 1; index < arr.length; index++) {
-        const element = arr[index];
-        const position ='C' + element[0] + 'R' + element[1] + '';
-        setTimeout(() => {
-            placeKnight(element[0], element[1]);
-        }, 400 * index - 1);
-    }
-    Promise.resolve(console.log('finished'))
 }
