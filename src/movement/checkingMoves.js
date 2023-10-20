@@ -1,3 +1,4 @@
+import getSquare from "./getSquare";
 
 export function getKnightMoves(x, y){
     var moves = [];
@@ -17,8 +18,7 @@ export function getKnightMoves(x, y){
 export function showAllKnightMoves(arr){
     for(let index = 0; index < arr.length; index++) {
         const element = arr[index];
-        const position ='C' + element[1] + 'R' + element[0] + '';
-        const square = document.querySelector('.' + position);
+        const square = getSquare(element[0], element[1]);
         square.classList.add('red');
     }
 }

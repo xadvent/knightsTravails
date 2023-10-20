@@ -3,14 +3,11 @@ import makeBoard from './building/makeBoard';
 import clearBoard from './building/clearBoard';
 import { findPathBFS, moveKnight } from './BFS/getPath';
 import { placeKnight } from './movement/moveIMG';
-import autopath from './run';
-import run from './run';
+import autopath from './autopath';
 
 makeBoard();
-// placeKnight(1,1);
-// findPathBFS(1,1,5,5)
-// run(1, 1, 5, 5)
 
+// change figures below to change starting and ending positions
 
 window.addEventListener('DOMContentLoaded', async function () {
     const endX = 5;
@@ -38,9 +35,9 @@ window.addEventListener('DOMContentLoaded', async function () {
         else if (e.target.classList.contains('square')) {
             const regex = /C(\d+)R(\d+)/;
             const position = e.target.classList[2];
-            const match = position.match(regex);
-            x = parseInt(match[1]);
-            y = parseInt(match[2]);
+            const match = position.match(regex) || [];
+            const x = parseInt(match[1], 10);
+            const y = parseInt(match[2], 10);
             placeKnight(x, y);
             clearBoard();
             path = findPathBFS(x, y, endX, endY);
@@ -65,33 +62,4 @@ window.addEventListener('DOMContentLoaded', async function () {
         - better testing of moveKnight
         - and allows for the path to be displayed before the knight moves
         - also allows for the path to be displayed without the knight moving
-        
-
-
-    The following code is for testing purposes only. It should be removed when the project is complete.
-        PS: I'm not sure if this is the best way to test the code. I'm open to suggestions.
-        PSPS: I'm not sure if this is the best way to write the code. I'm open to suggestions.
-        PSPSPS: I'm not sure if this is the best way to write the comments. I'm open to suggestions.
-
-        PSPSPSPS: the test code is not working as intended. I'm open to suggestions.
-
-
-// const regex = /C(\d+)R(\d+)/;
-// const allSquares = document.querySelectorAll('.square')
-// allSquares.forEach(square => {
-//     square.addEventListener('click', function (e) {
-//         if (document.querySelector('#knight') !== null) {
-//             clearBoard();
-//         } else {
-//             const position = e.target.classList[2];
-//             const match = position.match(regex);
-//             const x = parseInt(match[1]);
-//             const y = parseInt(match[2]);
-//             console.log(x,y)
-//             findPathBFS(x, y, 5, 5);
-//         }
-//     })
-
-// })
-
 */

@@ -2,11 +2,11 @@ import clearBoard from "./building/clearBoard";
 import { moveKnight, findPathBFS, markRed } from "./BFS/getPath";
 import { placeKnight } from "./movement/moveIMG";
 
-export default function autopath(x, y, endX, endY){
+export default function (x, y, endX, endY){
     const path = findPathBFS(x, y, endX, endY)
     placeKnight(x, y)
     markRed(path)
-    
+    return path
 
     // window.addEventListener('click', async function(e){
     //     if (e.target.id === 'knight'){
