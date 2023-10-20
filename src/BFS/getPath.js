@@ -1,5 +1,5 @@
 import { getKnightMoves } from "../movement/checkingMoves";
-import { moveImg } from "../movement/moveIMG";
+import { placeKnight } from "../movement/moveIMG";
 
 export class Node {
     constructor(x, y, path = []){
@@ -9,9 +9,9 @@ export class Node {
     }
 }
 
-export async function findPathBFS(x, y, endX, endY){
+export function findPathBFS(x, y, endX, endY){
     let start = '.C' + x + 'R' + y + '';
-    document.querySelector(start).classList.add('green');
+    document.querySelector(start).classList.add('start');
 
     let queue = [];
     queue.push(new Node(x, y));
@@ -26,8 +26,10 @@ export async function findPathBFS(x, y, endX, endY){
 
         // If matches, return path
         if(currentNode.x === endX && currentNode.y === endY){
-            await markRed(currentNode.path);
-            moveKnight(currentNode.path)
+            // markRed(currentNode.path);
+            // moveKnight(currentNode.path)
+            // UNCOMMENT FOR AUTORUN ^^
+
             return currentNode.path;
         }
 
@@ -48,7 +50,7 @@ export async function findPathBFS(x, y, endX, endY){
     return null; // return if there's no path to target
 }
 
-function markRed(arr){
+export function markRed(arr){
     let count = 1;
     for(let index = 1; index < arr.length; index++) {
         const element = arr[index];
@@ -67,11 +69,13 @@ export function moveKnight(arr){
         });
     }
 
-    for(let index = 0; index < arr.length; index++) {
+    // running through from start to end - changing positions every 400ms
+    for(let index = 1; index < arr.length; index++) {
         const element = arr[index];
         const position ='C' + element[0] + 'R' + element[1] + '';
         setTimeout(() => {
-            moveImg(element[0], element[1]);
+            placeKnight(element[0], element[1]);
         }, 400 * index - 1);
     }
+    Promise.resolve(console.log('finished'))
 }

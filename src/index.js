@@ -1,12 +1,54 @@
 import './style.css';
 import makeBoard from './building/makeBoard';
+import clearBoard from './building/clearBoard';
 import { findPathBFS, moveKnight } from './BFS/getPath';
-import { moveImg } from './movement/moveIMG';
+import { placeKnight } from './movement/moveIMG';
+import autopath from './run';
+import run from './run';
 
 makeBoard();
-moveImg(1,1);
-findPathBFS(1,1,5,5)
+// placeKnight(1,1);
+// findPathBFS(1,1,5,5)
+// run(1, 1, 5, 5)
 
+
+window.addEventListener('DOMContentLoaded', async function () {
+    const endX = 5;
+    const endY = 5;
+    let x = 1;
+    let y = 1;
+    let path = findPathBFS(x, y, endX, endY);
+    placeKnight(x, y);
+    autopath(x, y, endX, endY);
+
+    window.addEventListener('click', async function (e) {
+        if (e.target.id === 'knight') {
+            await moveKnight(path)
+                .then(() => {
+                    this.window.removeEventListener('click', this);
+                    clearBoard();
+                    x = endX;
+                    y = endY;
+                    path = findPathBFS(x, y, endX, endY);
+                    placeKnight(x, y);
+                    autopath(x, y, endX, endY);
+                    window.addEventListener('click', this);
+                });
+        }
+        else if (e.target.classList.contains('square')) {
+            const regex = /C(\d+)R(\d+)/;
+            const position = e.target.classList[2];
+            const match = position.match(regex);
+            x = parseInt(match[1]);
+            y = parseInt(match[2]);
+            placeKnight(x, y);
+            clearBoard();
+            path = findPathBFS(x, y, endX, endY);
+            autopath(x, y, endX, endY);
+            window.addEventListener('click', this);
+        }
+    });
+});
 
 
 /*
@@ -14,8 +56,8 @@ findPathBFS(1,1,5,5)
     moveKnight takes the path array and moves the knight to each position in the array.
     moveKnight should be called after the path is found (returned by findPathBFS).
 
-    moveImg SHOULD be called when a square is clicked. It takes the x and y coordinates of the square
-    Might only start movement when the knight is clicked for moveIMG
+    placeKnight SHOULD be called when a square is clicked. It takes the x and y coordinates of the square
+    Might only start movement when the knight is clicked for placeKnight
 
     Should change findpathBFS to return the path array and then call moveKnight on the path array
         This allows for 

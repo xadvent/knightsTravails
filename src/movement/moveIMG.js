@@ -3,7 +3,7 @@ const newKnight = new Image();
 newKnight.src = Knight;
 newKnight.id = 'knight';
 
-export function moveImg(x, y) {
+export function placeKnight(x, y) {
     const square = document.querySelector('.C' + x + 'R' + y + '');
     square.appendChild(newKnight)
 
