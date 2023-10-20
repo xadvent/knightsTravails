@@ -1,6 +1,7 @@
 :root {
     --dark: #9EBDD7;
 }
+
 html, body {
     margin: 0px;
     padding: 0px;
@@ -34,7 +35,6 @@ html, body {
     border: 1px solid black;
 }
 
-
 .red {
     background-color: red !important;
 }
@@ -47,8 +47,4 @@ html, body {
     display: flex;
     font-size: 20px;
     color: black;
-}
-
-#knight {
-
 }
