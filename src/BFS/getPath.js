@@ -1,4 +1,5 @@
 import { getKnightMoves } from "../movement/checkingMoves";
+import { moveImg } from "../movement/moveIMG";
 
 export class Node {
     constructor(x, y, path = []){
@@ -8,7 +9,10 @@ export class Node {
     }
 }
 
-export function findPathBFS(x, y, endX, endY){
+export async function findPathBFS(x, y, endX, endY){
+    let start = '.C' + x + 'R' + y + '';
+    document.querySelector(start).classList.add('green');
+
     let queue = [];
     queue.push(new Node(x, y));
 
@@ -22,7 +26,8 @@ export function findPathBFS(x, y, endX, endY){
 
         // If matches, return path
         if(currentNode.x === endX && currentNode.y === endY){
-            markRed(currentNode.path);
+            await markRed(currentNode.path);
+            moveKnight(currentNode.path)
             return currentNode.path;
         }
 
@@ -49,9 +54,24 @@ function markRed(arr){
         const element = arr[index];
         const position ='C' + element[0] + 'R' + element[1] + '';
         const square = document.querySelector('.' + position);
+        square.classList.add('red');
+        square.textContent = count++;
+    }
+}
+
+export function moveKnight(arr){
+    let checkForDelete = document.querySelectorAll('#knight');
+    if(checkForDelete.length > 0){
+        checkForDelete.forEach(element => {
+            element.remove();
+        });
+    }
+
+    for(let index = 0; index < arr.length; index++) {
+        const element = arr[index];
+        const position ='C' + element[0] + 'R' + element[1] + '';
         setTimeout(() => {
-            square.classList.add('red');
-            square.textContent = count++;
+            moveImg(element[0], element[1]);
         }, 400 * index - 1);
     }
 }
