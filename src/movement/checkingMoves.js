@@ -2,6 +2,7 @@ import getSquare from "./getSquare";
 
 export function getKnightMoves(x, y){
     var moves = [];
+    // All possible moves for a knight
     var xMoves = [1, 2, 2, 1, -1, -2, -2, -1];
     var yMoves = [2, 1, -1, -2, -2, -1, 1, 2];
 
@@ -12,6 +13,7 @@ export function getKnightMoves(x, y){
             moves.push([newX, newY]);
         }
     }
+    // Returns Array of possible moves
     return moves;
 }
 
