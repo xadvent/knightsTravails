@@ -3,6 +3,7 @@ import makeBoard from './building/makeBoard';
 import play from './movement/play';
 
 makeBoard();
+play(1, 1, 5, 5);
 
 // change figures below to change starting and ending positions
 play(1, 1, 5, 5);
