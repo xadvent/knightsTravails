@@ -7,17 +7,17 @@ export default function (x, y, endX, endY) {
         let path = findPathBFS(x, y, endX, endY);
         autopath(x, y, endX, endY);
 
-        window.addEventListener('click', async function (e) {
+        window.addEventListener('click', async function waitClick(e) {
             if (e.target.id === 'knight') {
+                this.window.removeEventListener('click', waitClick);
                 await moveKnight(path)
                     .then(() => {
-                        this.window.removeEventListener('click', this);
                         clearBoard();
                         // Storing X and Y coordinates of the knight at the END of the path so it's not automatically moved
                         x = endX;
                         y = endY;
                         autopath(x, y, endX, endY);
-                        window.addEventListener('click', this);
+                        window.addEventListener('click', waitClick);
                     });
             }
             else if (e.target.classList.contains('square')) {

@@ -3,14 +3,14 @@ import getSquare from "../movement/getSquare";
 import { placeKnight } from "../movement/moveIMG";
 
 class Node {
-    constructor(x, y, path = []){
+    constructor(x, y, path = []) {
         this.x = x;
         this.y = y;
         this.path = [...path, [x, y]];
     }
 }
 
-export function findPathBFS(x, y, endX, endY){
+export function findPathBFS(x, y, endX, endY) {
     let start = getSquare(x, y);
     start.classList.add('start');
 
@@ -22,21 +22,21 @@ export function findPathBFS(x, y, endX, endY){
     visited.add(x + ',' + y);
 
     // cont queue until empty
-    while (queue.length > 0){
+    while (queue.length > 0) {
         let currentNode = queue.shift();
 
         // If matches, return path
-        if(currentNode.x === endX && currentNode.y === endY){
+        if (currentNode.x === endX && currentNode.y === endY) {
             return currentNode.path;
         }
 
         let moves = getKnightMoves(currentNode.x, currentNode.y);
 
-        for(let move of moves){
+        for (let move of moves) {
             let [nextX, nextY] = move;
 
             // Check if already visited
-            if(!visited.has(nextX + ',' + nextY)){
+            if (!visited.has(nextX + ',' + nextY)) {
                 visited.add(nextX + ',' + nextY);
 
                 // Enqueue new position w/ updated path
@@ -44,12 +44,13 @@ export function findPathBFS(x, y, endX, endY){
             }
         }
     }
-    return null; // return if there's no path to target
+
+    return null;
 }
 
-export function markRed(arr){
+export function markRed(arr) {
     let count = 1;
-    for(let index = 1; index < arr.length; index++) {
+    for (let index = 1; index < arr.length; index++) {
         const element = arr[index];
         const square = getSquare(element[0], element[1])
         square.classList.add('red');
