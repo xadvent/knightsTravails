@@ -2,7 +2,7 @@ import { getKnightMoves } from "../movement/checkingMoves";
 import getSquare from "../movement/getSquare";
 import { placeKnight } from "../movement/moveIMG";
 
-export class Node {
+class Node {
     constructor(x, y, path = []){
         this.x = x;
         this.y = y;
@@ -58,14 +58,8 @@ export function markRed(arr){
 }
 
 export async function moveKnight(arr) {
-    let firstRun = true;
-
-    for (let index = 0; index < arr.length; index++) {
+    for (let index = 1; index < arr.length; index++) {
         const element = arr[index];
-        if(firstRun){
-            firstRun = false;
-            continue;
-        }
 
         await new Promise(resolve => {
             setTimeout(() => {
