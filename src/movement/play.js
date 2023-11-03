@@ -1,4 +1,4 @@
-import clearBoard  from '../building/clearBoard'
+import clearBoard from '../building/clearBoard';
 import { findPathBFS, moveKnight } from '../BFS/getPath';
 import autopath from '../autopath';
 
@@ -35,7 +35,7 @@ export default function (x, y, endX, endY) {
     });
 }
 
-function getLocation(input){
+function getLocation(input) {
     const regex = /C(\d+)R(\d+)/;
     const match = input.match(regex) || [];
     const x = parseInt(match[1], 10);
