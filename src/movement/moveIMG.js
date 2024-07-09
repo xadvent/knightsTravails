@@ -11,10 +11,11 @@ const newKing = new Image();
 newKing.src = King;
 newKing.id = 'king';
 
-var moveSound = new Audio(Move)
-moveSound.id = 'moveSound'
-moveSound.volume = 0.7
-document.querySelector('#start-menu').appendChild(moveSound)
+const moveSound = new Audio(Move);
+moveSound.id = 'moveSound';
+moveSound.volume = 0.7;
+moveSound.style.display = "none";
+document.querySelector('#start-menu').appendChild(moveSound);
 
 export function placeKnight(x, y) {
     const square = getSquare(x, y);
@@ -28,5 +29,5 @@ export function placeKnight(x, y) {
 
 export function placeTarget(x, y) {
     const square = getSquare(x, y);
-    square.appendChild(newKing)
+    square.appendChild(newKing);
 }

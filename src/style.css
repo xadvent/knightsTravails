@@ -55,3 +55,16 @@ body {
     font-size: 20px;
     color: black;
 }
+
+@media (max-width: 450px) {
+    #chess-board {
+        min-width: 300px;
+        min-height: 300px;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        border: 1px solid black;
+        -webkit-box-shadow: 5px 7px 12px -2px rgba(0, 0, 0, 0.47);
+        box-shadow: 5px 7px 12px -2px rgba(0, 0, 0, 0.47);
+    }
+}
